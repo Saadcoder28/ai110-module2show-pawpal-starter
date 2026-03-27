@@ -37,6 +37,18 @@ pip install -r requirements.txt
 ![PawPal App](pawpal_demo.png)
 
 
+## Features
+
+- **Object-Oriented Design** with Owner, Pet, Task, and Scheduler classes  
+- **Priority-Based Scheduling** to ensure important tasks are completed first  
+- **Time-Aware Planning** that fits tasks within available time constraints  
+- **Sorting by Time** using HH:MM format for chronological ordering  
+- **Task Filtering** to exclude completed tasks or view tasks by pet  
+- **Recurring Tasks** that automatically regenerate (daily/weekly)  
+- **Conflict Detection** to warn users about overlapping task times  
+- **Streamlit UI Integration** for interactive pet and task management  
+- **Automated Testing** using pytest to validate core functionality  
+
 ### Suggested workflow
 
 1. Read the scenario carefully and identify requirements and edge cases.
