@@ -32,6 +32,11 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+## 📸 Demo
+
+![PawPal App](pawpal_demo.png)
+
+
 ### Suggested workflow
 
 1. Read the scenario carefully and identify requirements and edge cases.

@@ -21,8 +21,6 @@ Welcome to the PawPal+ starter app.
 
 This file is intentionally thin. It gives you a working Streamlit app so you can start quickly,
 but **it does not implement the project logic**. Your job is to design the system and build it.
-
-Use this app as your interactive demo once your backend classes/functions exist.
 """
 )
 
@@ -46,7 +44,7 @@ if st.button("Add Pet"):
     new_pet = Pet(pet_name, species, int(pet_age))
     owner.add_pet(new_pet)
     st.success(f"{pet_name} added!")
-    
+
 st.subheader("Current Pets")
 
 pets = owner.get_pets()
@@ -92,12 +90,32 @@ st.subheader("Current Tasks")
 all_tasks = owner.get_all_tasks()
 
 if all_tasks:
-    for task in all_tasks:
-        st.write(f"- {task.title} ({task.duration} mins, priority {task.priority})")
+    # ✔ Sort tasks by time (uses your algorithm)
+    sorted_tasks = scheduler.sort_by_time(all_tasks)
+
+    task_data = []
+    for task in sorted_tasks:
+        task_data.append({
+            "Title": task.title,
+            "Duration": task.duration,
+            "Priority": task.priority,
+            "Time": task.time
+        })
+
+    st.table(task_data)
+
+    # ✔ Conflict detection (uses your algorithm)
+    conflicts = scheduler.detect_conflicts(all_tasks)
+
+    if conflicts:
+        st.warning("⚠️ Task conflicts detected!")
+        for t1, t2 in conflicts:
+            st.write(f"- {t1.title} conflicts with {t2.title} at {t1.time}")
 else:
     st.info("No tasks yet.")
 
 st.divider()
+
 
 st.subheader("Today's Schedule")
 
@@ -109,9 +127,13 @@ if st.button("Generate Schedule"):
     if plan:
         st.success("Today's Plan:")
         total = 0
+
         for task in plan:
-            st.write(f"- {task.title} ({task.duration} mins, priority {task.priority})")
+            st.write(f"🕒 {task.time} - {task.title} ({task.duration} mins, priority {task.priority})")
             total += task.duration
+
         st.write(f"Total Time Used: {total} mins")
+
+        st.caption("Tasks selected based on priority and available time.")
     else:
         st.warning("No tasks fit today's schedule.")
