@@ -54,3 +54,10 @@ Recurring tasks: Daily and weekly tasks automatically generate a new task when c
 Conflict detection: The scheduler detects tasks scheduled at the same time and provides warnings instead of failing.
 
 These features make the system more realistic, efficient, and helpful for busy pet owners.
+
+## Testing PawPal+
+
+To run the automated tests:
+
+```bash
+python -m pytest
