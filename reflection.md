@@ -36,6 +36,7 @@ I also used Copilot to help refine the structure and confirm relationships, such
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
 
+My scheduler uses a simple greedy approach to select tasks within the available time. This may not always give the most optimal combination, but it keeps the logic fast and easy to understand, which is sufficient for this application.
 ---
 
 ## 3. AI Collaboration

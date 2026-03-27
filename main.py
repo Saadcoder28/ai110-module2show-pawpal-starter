@@ -14,9 +14,9 @@ owner.add_pet(dog)
 owner.add_pet(cat)
 
 # Create tasks (all due today)
-task1 = Task("Morning Walk", duration=30, priority=1, due_date=date.today())
-task2 = Task("Feed Dog", duration=10, priority=2, due_date=date.today())
-task3 = Task("Clean Litter", duration=15, priority=1, due_date=date.today())
+task1 = Task("Morning Walk", 30, 1, date.today(), time="08:00", frequency="daily")
+task2 = Task("Feed Dog", 10, 2, date.today(), time="08:00")  # SAME TIME
+task3 = Task("Clean Litter", 15, 1, date.today(), time="09:00")
 
 # Add tasks to pets
 dog.add_task(task1)
@@ -34,3 +34,17 @@ print("Today's Schedule:\n")
 
 for task in plan:
     print(f"- {task.title} ({task.duration} mins, priority {task.priority})")
+    
+conflicts = scheduler.detect_conflicts(owner.get_all_tasks())
+
+if conflicts:
+    print("\n⚠️ Conflicts detected:")
+    for t1, t2 in conflicts:
+        print(f"- {t1.title} conflicts with {t2.title} at {t1.time}")
+        
+print("\nTesting recurrence:")
+
+new_task = task1.mark_complete()
+
+if new_task:
+    print(f"New recurring task created: {new_task.title} on {new_task.due_date}")
