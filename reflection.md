@@ -3,80 +3,78 @@
 ## 1. System Design
 
 Three core actions user should perform:
-1) Enter pet information
-2) Do tasks like feeding pet
-3) Get a daily schedule
+1) Enter pet information  
+2) Do tasks like feeding pet  
+3) Get a daily schedule  
 
-**a. Initial design**
+### a. Initial design
 
-- Briefly describe your initial UML design.
-My design includes four classes: Owner, Pet, Task, and Scheduler. Owner manages pets, Pet manages tasks, and Task stores details like duration, priority, and due date. The Scheduler generates a daily plan by organizing and prioritizing tasks. 
+My design includes four classes: Owner, Pet, Task, and Scheduler. Owner manages pets, Pet manages tasks, Task stores task details, and Scheduler generates a daily plan.
 
-I also used Copilot to help refine the structure and confirm relationships, such as ensuring that pets correctly contain tasks and that the scheduler operates on tasks across pets.
+I used Copilot to refine relationships and ensure clean separation of responsibilities between classes.
 
+### b. Design changes
 
-- What classes did you include, and what responsibilities did you assign to each?
-
-**b. Design changes**
-
-- Did your design change during implementation?
-- If yes, describe at least one change and why you made it.
+Yes, my design evolved during implementation. I added attributes like `time` and `frequency` to Task and introduced methods like conflict detection and time-based sorting to improve functionality.
 
 ---
 
 ## 2. Scheduling Logic and Tradeoffs
 
-**a. Constraints and priorities**
+### a. Constraints and priorities
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
+My scheduler considers time availability, task priority, due date, and completion status. Priority was most important because it ensures critical tasks are handled first.
 
-**b. Tradeoffs**
+### b. Tradeoffs
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+My scheduler uses a simple greedy approach to select tasks within available time. This may not always be optimal, but it is efficient and easy to understand for this use case.
 
-My scheduler uses a simple greedy approach to select tasks within the available time. This may not always give the most optimal combination, but it keeps the logic fast and easy to understand, which is sufficient for this application.
 ---
 
 ## 3. AI Collaboration
 
-**a. How you used AI**
+### a. How you used AI
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+I used Copilot for generating methods, debugging errors, and refining logic such as sorting, filtering, and recurrence handling. Short, focused prompts worked best.
 
-**b. Judgment and verification**
+### b. Judgment and verification
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+At one point, Copilot suggested overly complex logic for scheduling, which I simplified to keep the system readable. I verified correctness by testing and manually tracing outputs.
+
+### c. AI Strategy Reflection
+
+Inline suggestions and chat-based explanations in Copilot were most helpful for building and refining the scheduler.  
+
+I rejected one suggestion that overcomplicated recurrence logic and instead implemented a simpler version using `timedelta`.  
+
+Using separate chat sessions helped me focus on one phase at a time (design, logic, testing), which kept my work organized.  
+
+I learned that as the "lead architect," I must guide AI tools, verify outputs, and prioritize clarity over unnecessary complexity.
 
 ---
 
 ## 4. Testing and Verification
 
-**a. What you tested**
+### a. What you tested
 
-- What behaviors did you test?
-- Why were these tests important?
+I tested task completion, task addition, sorting by time, recurrence logic, conflict detection, and edge cases like empty task lists.
 
-**b. Confidence**
+### b. Confidence
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+I am highly confident (5/5) since all tests pass and key behaviors work correctly. With more time, I would test overlapping time ranges and more complex scheduling scenarios.
 
 ---
 
 ## 5. Reflection
 
-**a. What went well**
+### a. What went well
 
-- What part of this project are you most satisfied with?
+I am most satisfied with integrating backend logic with the Streamlit UI and making the scheduler both functional and user-friendly.
 
-**b. What you would improve**
+### b. What you would improve
 
-- If you had another iteration, what would you improve or redesign?
+I would improve the scheduling algorithm to handle overlapping durations and optimize task selection beyond a greedy approach.
 
-**c. Key takeaway**
+### c. Key takeaway
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+I learned how to design structured systems, break problems into components, and effectively collaborate with AI while maintaining control over design decisions.
