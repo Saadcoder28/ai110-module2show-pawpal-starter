@@ -2,9 +2,19 @@
 
 ## 1. System Design
 
+Three core actions user should perform:
+1) Enter pet information
+2) Do tasks like feeding pet
+3) Get a daily schedule
+
 **a. Initial design**
 
 - Briefly describe your initial UML design.
+My design includes four classes: Owner, Pet, Task, and Scheduler. Owner manages pets, Pet manages tasks, and Task stores details like duration, priority, and due date. The Scheduler generates a daily plan by organizing and prioritizing tasks. 
+
+I also used Copilot to help refine the structure and confirm relationships, such as ensuring that pets correctly contain tasks and that the scheduler operates on tasks across pets.
+
+
 - What classes did you include, and what responsibilities did you assign to each?
 
 **b. Design changes**

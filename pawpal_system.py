@@ -3,7 +3,6 @@ from datetime import date
 from typing import List
 
 
-# -------------------- Task --------------------
 @dataclass
 class Task:
     title: str
@@ -13,12 +12,14 @@ class Task:
     completed: bool = False
 
     def mark_complete(self):
-        pass
+        """Mark the task as completed."""
+        self.completed = True
 
     def is_due_today(self):
-        pass
+        """Check if the task is due today."""
+        return self.due_date == date.today()
 
-# -------------------- Pet --------------------
+
 @dataclass
 class Pet:
     name: str
@@ -27,40 +28,68 @@ class Pet:
     tasks: List[Task] = field(default_factory=list)
 
     def add_task(self, task: Task):
-        pass
+        """Add a task to the pet's task list."""
+        self.tasks.append(task)
 
     def remove_task(self, task: Task):
-        pass
+        """Remove a task from the pet's task list."""
+        if task in self.tasks:
+            self.tasks.remove(task)
 
     def get_tasks(self):
-        pass
+        """Get the list of tasks for the pet."""
+        return self.tasks
 
 
-# -------------------- Owner --------------------
 class Owner:
     def __init__(self, name: str):
         self.name = name
         self.pets: List[Pet] = []
 
     def add_pet(self, pet: Pet):
-        pass
+        self.pets.append(pet)
 
     def remove_pet(self, pet: Pet):
-        pass
+        if pet in self.pets:
+            self.pets.remove(pet)
 
     def get_pets(self):
-        pass
+        return self.pets
 
-# -------------------- Scheduler --------------------
+    def get_all_tasks(self):
+        all_tasks = []
+        for pet in self.pets:
+            all_tasks.extend(pet.get_tasks())
+        return all_tasks
+
+
 class Scheduler:
-    def generate_daily_plan(self, pets: List[Pet]):
-        pass
-
     def get_tasks_for_today(self, pets: List[Pet]):
-        pass
+        """Get all tasks due today from the given pets."""
+        today_tasks = []
+        for pet in pets:
+            for task in pet.get_tasks():
+                if task.is_due_today() and not task.completed:
+                    today_tasks.append(task)
+        return today_tasks
 
     def sort_by_priority(self, tasks: List[Task]):
-        pass
+        """Sort tasks by priority."""
+        return sorted(tasks, key=lambda task: task.priority)
 
     def filter_by_time(self, tasks: List[Task], available_time: int):
-        pass
+        """Filter tasks that fit within the available time."""
+        selected_tasks = []
+        time_used = 0
+        for task in tasks:
+            if time_used + task.duration <= available_time:
+                selected_tasks.append(task)
+                time_used += task.duration
+        return selected_tasks
+
+    def generate_daily_plan(self, pets: List[Pet], available_time: int):
+        """Generate a daily plan of tasks for the given pets within available time."""
+        tasks = self.get_tasks_for_today(pets)
+        tasks = self.sort_by_priority(tasks)
+        plan = self.filter_by_time(tasks, available_time)
+        return plan
