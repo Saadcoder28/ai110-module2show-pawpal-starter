@@ -49,6 +49,13 @@ pip install -r requirements.txt
 - **Streamlit UI Integration** for interactive pet and task management  
 - **Automated Testing** using pytest to validate core functionality  
 
+## System Design
+
+- **Task**: Represents a pet care task with attributes like duration, priority, due date, and completion status. Includes methods like `mark_complete()` and recurrence handling.
+- **Pet**: Stores pet information and manages a list of tasks with methods to add, remove, and retrieve tasks.
+- **Owner**: Manages multiple pets and provides access to all tasks across pets.
+- **Scheduler**: Contains the core scheduling logic, including sorting, filtering, conflict detection, and generating a daily plan.
+
 ### Suggested workflow
 
 1. Read the scenario carefully and identify requirements and edge cases.
